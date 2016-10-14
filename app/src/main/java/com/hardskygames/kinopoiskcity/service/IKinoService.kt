@@ -1,6 +1,7 @@
 package com.hardskygames.kinopoiskcity.service
 
 import com.hardskygames.kinopoiskcity.entity.Movie
+import com.hardskygames.kinopoiskcity.entity.MovieDetails
 import rx.Observable
 import java.util.*
 
@@ -10,4 +11,5 @@ import java.util.*
 
 interface IKinoService{
     fun getMoviesByDate(date: Date): Observable<List<Movie>>
+    fun getMovieDetails(id: Int): Observable<MovieDetails>
 }

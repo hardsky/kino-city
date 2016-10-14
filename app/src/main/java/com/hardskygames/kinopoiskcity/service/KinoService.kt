@@ -4,6 +4,7 @@ import com.hardskygames.kinopoiskcity.api.IKinoApi
 import com.hardskygames.kinopoiskcity.api.response.TodayFilm
 import com.hardskygames.kinopoiskcity.entity.City
 import com.hardskygames.kinopoiskcity.entity.Movie
+import com.hardskygames.kinopoiskcity.entity.MovieDetails
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -34,6 +35,11 @@ class KinoService(private val city: City): IKinoService {
                 map{film -> TodayFilmToMoview(film)}.
                 toList()
     }
+
+    override fun getMovieDetails(id: Int): Observable<MovieDetails> {
+        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 }
 
 fun TodayFilmToMoview(film: TodayFilm?): Movie{

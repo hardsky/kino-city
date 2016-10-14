@@ -1,5 +1,6 @@
 package com.hardskygames.kinopoiskcity.api
 
+import com.hardskygames.kinopoiskcity.api.response.GetFilmResponse
 import com.hardskygames.kinopoiskcity.api.response.GetTodayFilmsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,4 +13,7 @@ interface IKinoApi {
 
     @GET("/getTodayFilms")
     fun getTodayFilms(@Query("cityID") cityId: Int, @Query("date") date: String): Observable<GetTodayFilmsResponse>
+
+    @GET("/getFilm")
+    fun getFilm(@Query("filmID") filmId: Int): Observable<GetFilmResponse>
 }
