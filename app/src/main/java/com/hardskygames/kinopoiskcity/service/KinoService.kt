@@ -37,7 +37,21 @@ class KinoService(private val city: City): IKinoService {
     }
 
     override fun getMovieDetails(id: Int): Observable<MovieDetails> {
-        throw UnsupportedOperationException("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        return api.getFilm(id).
+                map{resp -> MovieDetails(resp.filmID,
+                        resp.nameRU!!,
+                        (resp.ratingData?.ratingIMDb ?: 0.0).toFloat(),
+                        resp.genre!!,
+                        "https://st.kp.yandex.net/images/film_big/${resp.filmID}.jpg",
+                        resp.description ?: "",
+                        resp.country ?: "",
+                        resp.year,
+                        resp.filmLength ?: "",
+                        resp.rentData?.premiereRU ?: "",
+                        "",//TODO:
+                        "")
+                }
     }
 
 }

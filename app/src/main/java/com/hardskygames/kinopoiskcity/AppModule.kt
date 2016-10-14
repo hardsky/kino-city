@@ -28,6 +28,7 @@ class AppModule(private val application: KinoApp) {
     @Singleton
     internal fun provideService(city: City): IKinoService {
         return KinoService(city)
+        //return KinoServiceStub()
     }
 
 
