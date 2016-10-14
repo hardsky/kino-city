@@ -1,0 +1,15 @@
+package com.hardskygames.kinopoiskcity.api
+
+import com.hardskygames.kinopoiskcity.api.response.GetTodayFilmsResponse
+import retrofit2.http.GET
+import retrofit2.http.Query
+import rx.Observable
+
+/**
+ * @author Nikolay Mihailov <hardsky@yandex.ru>  on 13.10.16.
+ */
+interface IKinoApi {
+
+    @GET("/getTodayFilms")
+    fun getTodayFilms(@Query("cityID") cityId: Int, @Query("date") date: String): Observable<GetTodayFilmsResponse>
+}
