@@ -66,7 +66,7 @@ class FillListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         Picasso.with(context).load(movie.posterUrl).into(imgPoster)
         txtTitle.text = movie.name
         txtGenre.text = "(${movie.genre})"
-        txtRating.text = movie.genre
+        txtRating.text = movie.rating.toString()
 
         //layout.setOnClickListener { context.startActivity() } :TODO:
     }
