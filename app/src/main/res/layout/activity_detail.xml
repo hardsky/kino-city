@@ -12,11 +12,45 @@
 
     <TextView
         android:id="@+id/txtTitle"
+        android:text="Test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/imgPoster"
+        android:layout_below="@id/txtTitle"
+        android:layout_width="100dp"
+        android:layout_height="150dp" />
+
+    <TextView
+        android:id="@+id/txtYear"
+        android:text="2016"
+        android:layout_below="@id/txtTitle"
+        android:layout_toRightOf="@id/imgPoster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtGenre"
+        android:text="(test test)"
+        android:layout_below="@id/txtYear"
+        android:layout_toRightOf="@id/imgPoster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtRating"
+        android:text="7.5"
+        android:layout_below="@id/txtGenre"
+        android:layout_toRightOf="@id/imgPoster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:text="Test test test"
+        android:layout_below="@id/txtRating"
+        android:layout_toRightOf="@id/imgPoster"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

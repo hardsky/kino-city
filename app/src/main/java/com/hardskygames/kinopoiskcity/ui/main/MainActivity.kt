@@ -1,12 +1,17 @@
 package com.hardskygames.kinopoiskcity.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.Movie
 import com.hardskygames.kinopoiskcity.service.IKinoService
 import com.hardskygames.kinopoiskcity.ui.BaseActivity
+import com.hardskygames.kinopoiskcity.ui.detail.DetailActivity
+import com.hardskygames.kinopoiskcity.ui.detail.MOVIE_ID_PARAM
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -20,6 +25,8 @@ class MainActivity : BaseActivity() {
     lateinit var service: IKinoService
     @Inject
     lateinit var adapter: FilmListAdapter
+    @Inject
+    lateinit var bus: EventBus
 
     private val subj = BehaviorSubject.create<List<Movie>>()
     lateinit private var subs: Subscription
@@ -44,11 +51,19 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
 
+        bus.register(this)
         subs = subj.subscribe{lst -> adapter.setData(lst); adapter.notifyDataSetChanged()}
     }
 
     override fun onPause() {
         subs.unsubscribe()
+        bus.unregister(this)
+
         super.onPause()
+    }
+
+    @Subscribe
+    fun onMovieClickEvent(ev: MovieClickEvent){
+        startActivity(Intent(this, DetailActivity::class.java).putExtra(MOVIE_ID_PARAM, ev.id))
     }
 }

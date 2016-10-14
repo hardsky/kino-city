@@ -1,7 +1,6 @@
 package com.hardskygames.kinopoiskcity.ui.main
 
 import android.content.Context
-import android.support.v7.view.menu.MenuView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +31,7 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FillListViewHolder {
         val inflater = parent!!.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        return FillListViewHolder(inflater.inflate(R.layout.film_item, null))
+        return FillListViewHolder(bus, inflater.inflate(R.layout.film_item, null))
     }
 
     override fun getItemCount(): Int {
@@ -45,7 +44,7 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
     }
 }
 
-class FillListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class FillListViewHolder(private val bus: EventBus, itemView: View) : RecyclerView.ViewHolder(itemView) {
     val layout: View
     val imgPoster: ImageView
     val txtTitle: TextView
@@ -68,6 +67,6 @@ class FillListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         txtGenre.text = "(${movie.genre})"
         txtRating.text = movie.rating.toString()
 
-        //layout.setOnClickListener { context.startActivity() } :TODO:
+        layout.setOnClickListener { bus.post(MovieClickEvent(movie.id)) }
     }
 }
