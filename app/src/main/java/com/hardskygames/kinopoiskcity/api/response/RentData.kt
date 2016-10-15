@@ -13,14 +13,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 class RentData {
 
     @JsonProperty("premiereRU")
-    var premiereRU: String? = null
+    var premiereRU: String = ""
 
     @JsonProperty("Distributors")
-    var distributors: String? = null
+    var distributors: String = ""
 
     @JsonProperty("premiereWorld")
-    var premiereWorld: String? = null
+    var premiereWorld: String = ""
 
     @JsonProperty("premiereWorldCountry")
-    var premiereWorldCountry: String? = null
+    var premiereWorldCountry: String = ""
 }

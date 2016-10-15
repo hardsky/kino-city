@@ -16,20 +16,20 @@ class Creator {
     var id: Int = 0
 
     @JsonProperty("type")
-    var type: String? = null
+    var type: String = ""
 
     @JsonProperty("nameRU")
-    var nameRU: String? = null
+    var nameRU: String = ""
 
     @JsonProperty("nameEN")
-    var nameEN: String? = null
+    var nameEN: String = ""
 
     @JsonProperty("posterURL")
-    var posterURL: String? = null
+    var posterURL: String = ""
 
     @JsonProperty("professionText")
-    var professionText: String? = null
+    var professionText: String = ""
 
     @JsonProperty("professionKey")
-    var professionKey: String? = null
+    var professionKey: String = ""
 }

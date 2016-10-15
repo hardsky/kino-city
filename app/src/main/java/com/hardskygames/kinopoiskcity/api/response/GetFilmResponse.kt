@@ -29,40 +29,40 @@ class GetFilmResponse {
     var filmID: Int = 0
 
     @JsonProperty("webURL")
-    var webURL: String? = null
+    var webURL: String = ""
 
     @JsonProperty("nameRU")
-    var nameRU: String? = null
+    var nameRU: String = ""
 
     @JsonProperty("nameEN")
-    var nameEN: String? = null
+    var nameEN: String = ""
 
     @JsonProperty("posterURL")
-    var posterURL: String? = null
+    var posterURL: String = ""
 
     @JsonProperty("year")
     var year: Int = 0
 
     @JsonProperty("filmLength")
-    var filmLength: String? = null
+    var filmLength: String = ""
 
     @JsonProperty("country")
-    var country: String? = null
+    var country: String = ""
 
     @JsonProperty("genre")
-    var genre: String? = null
+    var genre: String = ""
 
     @JsonProperty("slogan")
-    var slogan: String? = null
+    var slogan: String = ""
 
     @JsonProperty("description")
-    var description: String? = null
+    var description: String = ""
 
     @JsonProperty("videoURL")
     var videoURL: VideoURL? = null
 
     @JsonProperty("ratingMPAA")
-    var ratingMPAA: String? = null
+    var ratingMPAA: String = ""
 
     @JsonProperty("ratingAgeLimits")
     var ratingAgeLimits: Int = 0
@@ -89,5 +89,5 @@ class GetFilmResponse {
     var triviaData: List<String> = ArrayList()
 
     @JsonProperty("imdbID")
-    var imdbID: String? = null
+    var imdbID: String = ""
 }

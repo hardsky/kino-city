@@ -9,16 +9,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
-@JsonPropertyOrder("hd", "sd", "low")
-class VideoURL {
+@JsonPropertyOrder("time")
+class Seance {
 
-    @JsonProperty("hd")
-    var hd: String = ""
-
-    @JsonProperty("sd")
-    var sd: String = ""
-
-    @JsonProperty("low")
-    var low: String = ""
-
+    @JsonProperty("time")
+    var time: String = ""
 }

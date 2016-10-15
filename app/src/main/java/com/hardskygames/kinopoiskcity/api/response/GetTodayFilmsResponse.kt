@@ -30,7 +30,7 @@ class GetTodayFilmsResponse {
      * @param date The date
      */
     @JsonProperty("date")
-    var date: String? = null
+    var date: String = ""
 
 }
 

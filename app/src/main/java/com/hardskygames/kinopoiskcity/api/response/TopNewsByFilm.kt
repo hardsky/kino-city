@@ -16,17 +16,17 @@ class TopNewsByFilm {
     var id: Int = 0
 
     @JsonProperty("newsDate")
-    var newsDate: String? = null
+    var newsDate: String = ""
 
     @JsonProperty("newsImagePreviewURL")
-    var newsImagePreviewURL: String? = null
+    var newsImagePreviewURL: String = ""
 
     @JsonProperty("newsTitle")
-    var newsTitle: String? = null
+    var newsTitle: String = ""
 
     @JsonProperty("newsDescription")
-    var newsDescription: String? = null
+    var newsDescription: String = ""
 
     @JsonProperty("videoURL")
-    var videoURL: String? = null
+    var videoURL: String = ""
 }

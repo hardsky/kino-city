@@ -13,6 +13,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 class Gallery {
 
     @JsonProperty("preview")
-    var preview: String? = null
+    var preview: String = ""
 
 }

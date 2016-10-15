@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 class RatingData {
 
     @JsonProperty("ratingGoodReview")
-    var ratingGoodReview: String? = null
+    var ratingGoodReview: String = ""
 
     @JsonProperty("ratingGoodReviewVoteCount")
     var ratingGoodReviewVoteCount: Int = 0
@@ -22,28 +22,28 @@ class RatingData {
     var rating: Double = 0.toDouble()
 
     @JsonProperty("ratingVoteCount")
-    var ratingVoteCount: String? = null
+    var ratingVoteCount: String = ""
 
     @JsonProperty("ratingAwait")
-    var ratingAwait: String? = null
+    var ratingAwait: String = ""
 
     @JsonProperty("ratingAwaitCount")
-    var ratingAwaitCount: String? = null
+    var ratingAwaitCount: String = ""
 
     @JsonProperty("ratingIMDb")
     var ratingIMDb: Double = 0.toDouble()
 
     @JsonProperty("ratingIMDbVoteCount")
-    var ratingIMDbVoteCount: String? = null
+    var ratingIMDbVoteCount: String = ""
 
     @JsonProperty("ratingFilmCritics")
-    var ratingFilmCritics: String? = null
+    var ratingFilmCritics: String = ""
 
     @JsonProperty("ratingFilmCriticsVoteCount")
-    var ratingFilmCriticsVoteCount: String? = null
+    var ratingFilmCriticsVoteCount: String = ""
 
     @JsonProperty("ratingRFCritics")
-    var ratingRFCritics: String? = null
+    var ratingRFCritics: String = ""
 
     @JsonProperty("ratingRFCriticsVoteCount")
     var ratingRFCriticsVoteCount: Int = 0
