@@ -24,9 +24,10 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
     lateinit var bus: EventBus
 
     val filmList: MutableList<Movie> = ArrayList()
+    var filtered: MutableList<Movie>? = null
 
     override fun onBindViewHolder(holder: FillListViewHolder, position: Int) {
-        holder.setData(filmList[position])
+        holder.setData((filtered ?: filmList)[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): FillListViewHolder {
@@ -35,21 +36,30 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return filmList.size
+        return (filtered ?: filmList).size
     }
 
     fun setData(lst: List<Movie>) {
         filmList.clear()
         filmList.addAll(lst)
+        filtered = null
     }
 
     fun sort(sort: RatingSortState) {
         when(sort){
-            RatingSortState.NONE -> filmList.sortBy(Movie::id)
-            RatingSortState.DESCENDING -> filmList.sortByDescending(Movie::rating)
-            RatingSortState.ASCENDING -> filmList.sortBy(Movie::rating)
+            RatingSortState.NONE -> (filtered ?: filmList).sortBy(Movie::id)
+            RatingSortState.DESCENDING -> (filtered ?: filmList).sortByDescending(Movie::rating)
+            RatingSortState.ASCENDING -> (filtered ?: filmList).sortBy(Movie::rating)
         }
-        notifyDataSetChanged()
+    }
+
+    fun filter(genre: String) {
+        if(genre == "все") {
+            filtered = null
+        }
+        else {
+            filtered = filmList.filter { movie -> movie.genre.contains(genre) } as MutableList<Movie>
+        }
     }
 }
 

@@ -3,6 +3,9 @@ package com.hardskygames.kinopoiskcity.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.Movie
 import com.hardskygames.kinopoiskcity.service.IKinoService
@@ -34,6 +37,7 @@ class MainActivity : BaseActivity() {
     override val modules: List<Any> = listOf(MainActivityModule(this))
 
     private var sort = RatingSortState.NONE
+    private var genre = "Все"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,21 @@ class MainActivity : BaseActivity() {
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(subj)
+
+        val spinnerAdapter = ArrayAdapter.createFromResource(this,
+                R.array.genres, android.R.layout.simple_spinner_item)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinRating.adapter = spinnerAdapter
+        spinRating.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                genre = parent.getItemAtPosition(position) as String
+                adapter.filter(genre)
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onResume() {
@@ -61,6 +80,7 @@ class MainActivity : BaseActivity() {
                 RatingSortState.ASCENDING -> RatingSortState.NONE
             }
             adapter.sort(sort)
+            adapter.notifyDataSetChanged()
         }
     }
 
