@@ -2,7 +2,6 @@ package com.hardskygames.kinopoiskcity.service
 
 import com.hardskygames.kinopoiskcity.api.IKinoApi
 import com.hardskygames.kinopoiskcity.api.response.Cinema
-import com.hardskygames.kinopoiskcity.api.response.GetSeanceResponse
 import com.hardskygames.kinopoiskcity.api.response.TodayFilm
 import com.hardskygames.kinopoiskcity.entity.City
 import com.hardskygames.kinopoiskcity.entity.Movie

@@ -29,9 +29,7 @@ class ScheduleActivity : BaseActivity() {
     private val subj = BehaviorSubject.create<List<Seance>>()
     lateinit private var subs: Subscription
 
-    override fun getModules(): MutableList<Any> {
-        return mutableListOf(ScheduleActivityModule(this))
-    }
+    override val modules: List<Any> = listOf(ScheduleActivityModule(this))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

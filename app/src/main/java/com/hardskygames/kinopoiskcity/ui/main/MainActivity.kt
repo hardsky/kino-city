@@ -31,9 +31,7 @@ class MainActivity : BaseActivity() {
     private val subj = BehaviorSubject.create<List<Movie>>()
     lateinit private var subs: Subscription
 
-    override fun getModules(): MutableList<Any> {
-        return mutableListOf(MainActivityModule(this))
-    }
+    override val modules: List<Any> = listOf(MainActivityModule(this))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

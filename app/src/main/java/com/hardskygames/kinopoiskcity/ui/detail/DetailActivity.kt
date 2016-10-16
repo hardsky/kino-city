@@ -17,16 +17,15 @@ import javax.inject.Inject
 
 const val MOVIE_ID_PARAM = "MOVIE_ID_PARAM"
 
-class DetailActivity : BaseActivity() {
+class DetailActivity() : BaseActivity() {
     @Inject
     lateinit var service: IKinoService
 
     private val subj = BehaviorSubject.create<MovieDetails>()
     lateinit private var subs: Subscription
 
-    override fun getModules(): MutableList<Any> {
-        return mutableListOf(DetailActivityModule(this))
-    }
+
+    override val modules: List<Any> = listOf(DetailActivityModule(this))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
