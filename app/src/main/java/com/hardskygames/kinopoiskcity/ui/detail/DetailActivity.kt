@@ -1,10 +1,12 @@
 package com.hardskygames.kinopoiskcity.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.MovieDetails
 import com.hardskygames.kinopoiskcity.service.IKinoService
 import com.hardskygames.kinopoiskcity.ui.BaseActivity
+import com.hardskygames.kinopoiskcity.ui.schedule.ScheduleActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import rx.Subscription
@@ -48,5 +50,8 @@ class DetailActivity : BaseActivity() {
             txtRating.text = movie.rating.toString()
             txtDescription.text = movie.description
         }
+
+        btnSchedule.setOnClickListener { startActivity(Intent(this, ScheduleActivity::class.java).
+                putExtra(com.hardskygames.kinopoiskcity.ui.schedule.MOVIE_ID_PARAM, id)) }
     }
 }

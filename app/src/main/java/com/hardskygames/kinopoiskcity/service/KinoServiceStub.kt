@@ -2,6 +2,7 @@ package com.hardskygames.kinopoiskcity.service
 
 import com.hardskygames.kinopoiskcity.entity.Movie
 import com.hardskygames.kinopoiskcity.entity.MovieDetails
+import com.hardskygames.kinopoiskcity.entity.Seance
 import rx.Observable
 import java.util.*
 
@@ -31,5 +32,15 @@ class KinoServiceStub : IKinoService {
                 "06.10.2016",
                 "Тим Бёртон",
                 "Ева Грин, Эйса Баттерфилд, Сэмюэл Л. Джексон, Джуди Денч, Руперт Эверетт, Эллисон Дженни, Крис О’Дауд, Теренс Стэмп, Элла Пернелл, Финлэй МакМиллан"))
+    }
+
+    override fun getSeances(movieId: Int, date: Date): Observable<List<Seance>> {
+        return Observable.from(Arrays.asList(
+                Seance("Киносфера", "14:30", "Челнокова, 11", 20.485269794967625, 54.73764481410551),
+                Seance("Киносфера", "21:55", "Челнокова, 11", 20.485269794967625, 54.73764481410551),
+                Seance("Синема Парк Европа", "14:20", "Профессора Баранова, 40", 20.498978063415528, 54.71856375060162),
+                Seance("Синема Парк Европа", "21:00", "Профессора Баранова, 40", 20.498978063415528, 54.71856375060162)
+        ))
+                .toList()
     }
 }

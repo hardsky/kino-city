@@ -29,5 +29,5 @@ class Cinema {
     var cinemaName: String = ""
 
     @JsonProperty("seance")
-    var seance: List<Seance> = ArrayList()
+    var seance: List<SeanceResponse> = ArrayList()
 }

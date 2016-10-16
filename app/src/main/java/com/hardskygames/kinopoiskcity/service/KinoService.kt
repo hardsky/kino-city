@@ -1,10 +1,13 @@
 package com.hardskygames.kinopoiskcity.service
 
 import com.hardskygames.kinopoiskcity.api.IKinoApi
+import com.hardskygames.kinopoiskcity.api.response.Cinema
+import com.hardskygames.kinopoiskcity.api.response.GetSeanceResponse
 import com.hardskygames.kinopoiskcity.api.response.TodayFilm
 import com.hardskygames.kinopoiskcity.entity.City
 import com.hardskygames.kinopoiskcity.entity.Movie
 import com.hardskygames.kinopoiskcity.entity.MovieDetails
+import com.hardskygames.kinopoiskcity.entity.Seance
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -54,9 +57,30 @@ class KinoService(private val city: City): IKinoService {
                 }
     }
 
+    override fun getSeances(movieId: Int, date: Date): Observable<List<Seance>> {
+        return api.getSeance(movieId, city.id, String.format("dd.MM.yyyy", date)).
+                flatMap{resp -> Observable.from(resp.items)}.
+                map { cinema -> CinemaToSeances(cinema) }.
+                reduce { sum: List<Seance>?, next: List<Seance>? ->
+                    if (sum == null)
+                        next
+                    else
+                        sum.plus(next!!)
+                }
+    }
 }
 
 fun TodayFilmToMoview(film: TodayFilm?): Movie{
-    return Movie(film!!.id, film.nameRU!!, film.rating!!.split(" ")[0].toFloat(), film.genre!!,
+    return Movie(film!!.id, film.nameRU, film.rating.split(" ")[0].toFloat(), film.genre,
             "https://st.kp.yandex.net/images/sm_film/${film.id}.jpg")
+}
+
+fun CinemaToSeances(cinema: Cinema): List<Seance>{
+    val seances = ArrayList<Seance>(cinema.seance.size)
+    for (apiSeance in cinema.seance){
+        val seance = Seance(cinema.cinemaName, apiSeance.time, cinema.address, cinema.lat, cinema.lon)
+        seances.add(seance)
+    }
+
+    return seances
 }

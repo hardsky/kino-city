@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgMap"
+        android:layout_marginRight="72dp"
+        android:src="@drawable/ic_map_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_alignParentRight="true"
+        android:text="23:05"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_toRightOf="@id/imgMap"
+        android:textSize="16sp"
+        android:text="Киносфера"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_toRightOf="@id/imgMap"
+        android:layout_below="@id/txtName"
+        android:textSize="14sp"
+        android:text="Челнокова, 11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
