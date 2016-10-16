@@ -23,7 +23,7 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
     @Inject
     lateinit var bus: EventBus
 
-    val filmList = ArrayList<Movie>()
+    val filmList: MutableList<Movie> = ArrayList()
 
     override fun onBindViewHolder(holder: FillListViewHolder, position: Int) {
         holder.setData(filmList[position])
@@ -41,6 +41,15 @@ class FilmListAdapter: RecyclerView.Adapter<FillListViewHolder>() {
     fun setData(lst: List<Movie>) {
         filmList.clear()
         filmList.addAll(lst)
+    }
+
+    fun sort(sort: RatingSortState) {
+        when(sort){
+            RatingSortState.NONE -> filmList.sortBy(Movie::id)
+            RatingSortState.DESCENDING -> filmList.sortByDescending(Movie::rating)
+            RatingSortState.ASCENDING -> filmList.sortBy(Movie::rating)
+        }
+        notifyDataSetChanged()
     }
 }
 
@@ -69,4 +78,10 @@ class FillListViewHolder(private val bus: EventBus, itemView: View) : RecyclerVi
 
         layout.setOnClickListener { bus.post(MovieClickEvent(movie.id)) }
     }
+}
+
+enum class RatingSortState {
+    NONE,
+    DESCENDING,
+    ASCENDING
 }

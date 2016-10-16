@@ -33,6 +33,8 @@ class MainActivity : BaseActivity() {
 
     override val modules: List<Any> = listOf(MainActivityModule(this))
 
+    private var sort = RatingSortState.NONE
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,6 +53,15 @@ class MainActivity : BaseActivity() {
 
         bus.register(this)
         subs = subj.subscribe{lst -> adapter.setData(lst); adapter.notifyDataSetChanged()}
+
+        btnSort.setOnClickListener {
+            sort = when(sort){
+                RatingSortState.NONE -> RatingSortState.DESCENDING
+                RatingSortState.DESCENDING -> RatingSortState.ASCENDING
+                RatingSortState.ASCENDING -> RatingSortState.NONE
+            }
+            adapter.sort(sort)
+        }
     }
 
     override fun onPause() {
