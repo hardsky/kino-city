@@ -61,6 +61,6 @@ class SeanceListViewHolder(private val bus: EventBus, itemView: View) : Recycler
         txtTime.text = seance.time
         txtName.text = seance.name
         txtAddress.text = seance.address
-        layout.setOnClickListener { bus.post(SeanceClickEvent(seance.lon, seance.lat)) }
+        layout.setOnClickListener { bus.post(SeanceClickEvent(seance.name, seance.lon, seance.lat)) }
     }
 }

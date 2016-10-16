@@ -1,5 +1,7 @@
 package com.hardskygames.kinopoiskcity.ui.schedule
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.hardskygames.kinopoiskcity.R
@@ -8,6 +10,7 @@ import com.hardskygames.kinopoiskcity.service.IKinoService
 import com.hardskygames.kinopoiskcity.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_schedule.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -50,14 +53,23 @@ class ScheduleActivity : BaseActivity() {
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(subj)
 
-        //bus.register(this)
+        bus.register(this)
         subs = subj.subscribe{lst -> adapter.setData(lst); adapter.notifyDataSetChanged()}
     }
 
     override fun onPause() {
         subs.unsubscribe()
-        //bus.unregister(this)
+        bus.unregister(this)
 
         super.onPause()
+    }
+
+    @Subscribe
+    fun onSeanceClickEvent(ev: SeanceClickEvent){
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(String.format(Locale.US, "geo:0,0?q=%f,%f(%s)", ev.lat, ev.lon, ev.cinema))
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 }
