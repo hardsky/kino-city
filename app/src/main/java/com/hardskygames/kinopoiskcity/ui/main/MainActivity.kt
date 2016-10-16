@@ -3,6 +3,7 @@ package com.hardskygames.kinopoiskcity.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -19,6 +20,7 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -30,6 +32,8 @@ class MainActivity : BaseActivity() {
     lateinit var adapter: FilmListAdapter
     @Inject
     lateinit var bus: EventBus
+    @Inject
+    lateinit var movieDate: Date
 
     private val subj = BehaviorSubject.create<List<Movie>>()
     lateinit private var subs: Subscription
@@ -37,19 +41,21 @@ class MainActivity : BaseActivity() {
     override val modules: List<Any> = listOf(MainActivityModule(this))
 
     private var sort = RatingSortState.NONE
-    private var genre = "Все"
+    private var genre = "все"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(toolbar)
+
         lstMovies.layoutManager = LinearLayoutManager(this)
         lstMovies.adapter = adapter
 
-        service.getMoviesByDate(Date()).
+        /*service.getMoviesByDate(Date()).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
-                subscribe(subj)
+                subscribe(subj)*/
 
         val spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.genres, android.R.layout.simple_spinner_item)
@@ -63,6 +69,36 @@ class MainActivity : BaseActivity() {
                 genre = parent.getItemAtPosition(position) as String
                 adapter.filter(genre)
                 adapter.notifyDataSetChanged()
+            }
+        }
+
+        val dates = ArrayList<String>(6)
+        for (i in 0..5){
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DAY_OF_YEAR, i)
+            dates.add(String.format("%1\$td.%1\$tm.%1\$tY", calendar.time))
+        }
+        val dateAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, dates)
+        dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinDate.adapter = dateAdapter
+        spinDate.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+
+                val calendar = Calendar.getInstance()
+                calendar.add(Calendar.DAY_OF_YEAR, position)
+                movieDate.time = calendar.time.time
+
+                sort = RatingSortState.NONE
+                genre = "все"
+
+                service.getMoviesByDate(movieDate).
+                        subscribeOn(Schedulers.io()).
+                        observeOn(AndroidSchedulers.mainThread()).
+                        subscribe { v -> Timber.d("Test!!!"); subj.onNext(v) }
+
             }
         }
     }

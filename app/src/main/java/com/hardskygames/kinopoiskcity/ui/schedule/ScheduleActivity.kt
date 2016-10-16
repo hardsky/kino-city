@@ -25,6 +25,8 @@ class ScheduleActivity : BaseActivity() {
     lateinit var bus: EventBus
     @Inject
     lateinit var adapter: SeanceListAdapter
+    @Inject
+    lateinit var movieDate: Date
 
     private val subj = BehaviorSubject.create<List<Seance>>()
     lateinit private var subs: Subscription
@@ -43,7 +45,7 @@ class ScheduleActivity : BaseActivity() {
         super.onResume()
 
         val movieId = intent.getIntExtra(com.hardskygames.kinopoiskcity.ui.schedule.MOVIE_ID_PARAM, 0)
-        service.getSeances(movieId, Date()).
+        service.getSeances(movieId, movieDate).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(subj)

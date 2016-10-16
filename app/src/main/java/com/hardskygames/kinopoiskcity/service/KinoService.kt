@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import rx.Observable
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -32,8 +33,8 @@ class KinoService(private val city: City): IKinoService {
     }
 
     override fun getMoviesByDate(date: Date): Observable<List<Movie>> {
-        return api.getTodayFilms(city.id, String.format("dd.MM.yyyy", date)).
-                flatMap { resp -> Observable.from(resp.films) }.
+        return api.getTodayFilms(city.id, String.format("%1\$td.%1\$tm.%1\$tY", date)).
+                flatMap { resp -> Timber.d(resp.date); Observable.from(resp.films) }.
                 map{film -> TodayFilmToMoview(film)}.
                 toList()
     }
@@ -57,8 +58,8 @@ class KinoService(private val city: City): IKinoService {
     }
 
     override fun getSeances(movieId: Int, date: Date): Observable<List<Seance>> {
-        return api.getSeance(movieId, city.id, String.format("dd.MM.yyyy", date)).
-                flatMap{resp -> Observable.from(resp.items)}.
+        return api.getSeance(movieId, city.id, String.format("%1\$td.%1\$tm.%1\$tY", date)).
+                flatMap{resp -> Timber.d(resp.date); Observable.from(resp.items)}.
                 map { cinema -> CinemaToSeances(cinema) }.
                 reduce { sum: List<Seance>?, next: List<Seance>? ->
                     if (sum == null)

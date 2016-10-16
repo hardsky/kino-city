@@ -8,6 +8,7 @@ import com.hardskygames.kinopoiskcity.service.KinoServiceStub
 import dagger.Module
 import dagger.Provides
 import org.greenrobot.eventbus.EventBus
+import java.util.*
 import javax.inject.Singleton
 
 /**
@@ -37,4 +38,11 @@ class AppModule(private val application: KinoApp) {
     internal fun provideCity(): City {
         return City()
     }
+
+    @Provides
+    @Singleton
+    internal fun provideDate(): Date {
+        return Date()
+    }
+
 }
