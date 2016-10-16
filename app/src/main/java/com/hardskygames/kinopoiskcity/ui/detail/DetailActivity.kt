@@ -2,6 +2,7 @@ package com.hardskygames.kinopoiskcity.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.MovieDetails
 import com.hardskygames.kinopoiskcity.service.IKinoService
@@ -13,6 +14,7 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
+import timber.log.Timber
 import javax.inject.Inject
 
 const val MOVIE_ID_PARAM = "MOVIE_ID_PARAM"
@@ -41,14 +43,17 @@ class DetailActivity() : BaseActivity() {
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(subj)
 
-        subs = subj.subscribe{movie ->
+        subs = subj.subscribe({movie ->
             txtTitle.text = movie.name
             Picasso.with(this).load(movie.posterUrl).into(imgPoster)
             txtYear.text = "${movie.year}г."
             txtGenre.text = movie.genre
             txtRating.text = movie.rating.toString()
             txtDescription.text = movie.description
-        }
+        },{t ->
+            Timber.e(t, "Error on movies request.")
+            Toast.makeText(this@DetailActivity, R.string.err_service, Toast.LENGTH_LONG).show()
+        })
 
         btnSchedule.setOnClickListener { startActivity(Intent(this, ScheduleActivity::class.java).
                 putExtra(com.hardskygames.kinopoiskcity.ui.schedule.MOVIE_ID_PARAM, id)) }

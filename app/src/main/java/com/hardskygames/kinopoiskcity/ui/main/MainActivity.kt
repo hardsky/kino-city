@@ -3,10 +3,10 @@ package com.hardskygames.kinopoiskcity.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.Movie
 import com.hardskygames.kinopoiskcity.service.IKinoService
@@ -52,11 +52,6 @@ class MainActivity : BaseActivity() {
         lstMovies.layoutManager = LinearLayoutManager(this)
         lstMovies.adapter = adapter
 
-        /*service.getMoviesByDate(Date()).
-                subscribeOn(Schedulers.io()).
-                observeOn(AndroidSchedulers.mainThread()).
-                subscribe(subj)*/
-
         val spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.genres, android.R.layout.simple_spinner_item)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -97,7 +92,11 @@ class MainActivity : BaseActivity() {
                 service.getMoviesByDate(movieDate).
                         subscribeOn(Schedulers.io()).
                         observeOn(AndroidSchedulers.mainThread()).
-                        subscribe { v -> Timber.d("Test!!!"); subj.onNext(v) }
+                        subscribe({ v -> subj.onNext(v) },
+                                { t ->
+                                    Timber.e(t, "Error on movies request.")
+                                    Toast.makeText(this@MainActivity, R.string.err_service, Toast.LENGTH_LONG).show()
+                                })
 
             }
         }

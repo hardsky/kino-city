@@ -4,6 +4,7 @@ import com.hardskygames.kinopoiskcity.api.IKinoApi
 import com.hardskygames.kinopoiskcity.entity.City
 import com.hardskygames.kinopoiskcity.service.IKinoService
 import com.hardskygames.kinopoiskcity.service.KinoService
+import com.hardskygames.kinopoiskcity.service.KinoServiceErrorStub
 import com.hardskygames.kinopoiskcity.service.KinoServiceStub
 import dagger.Module
 import dagger.Provides
@@ -30,6 +31,7 @@ class AppModule(private val application: KinoApp) {
     internal fun provideService(city: City): IKinoService {
         return KinoService(city)
         //return KinoServiceStub()
+        //return KinoServiceErrorStub()
     }
 
 

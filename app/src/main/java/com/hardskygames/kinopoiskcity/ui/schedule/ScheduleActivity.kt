@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.hardskygames.kinopoiskcity.R
 import com.hardskygames.kinopoiskcity.entity.Seance
 import com.hardskygames.kinopoiskcity.service.IKinoService
@@ -15,6 +16,7 @@ import rx.Subscription
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subjects.BehaviorSubject
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -54,7 +56,14 @@ class ScheduleActivity : BaseActivity() {
                 subscribe(subj)
 
         bus.register(this)
-        subs = subj.subscribe{lst -> adapter.setData(lst); adapter.notifyDataSetChanged()}
+        subs = subj.subscribe({ lst ->
+            adapter.setData(lst)
+            adapter.notifyDataSetChanged()
+        },
+        { t ->
+            Timber.e(t, "Error on movies request.")
+            Toast.makeText(this@ScheduleActivity, R.string.err_service, Toast.LENGTH_LONG).show()
+        })
     }
 
     override fun onPause() {
