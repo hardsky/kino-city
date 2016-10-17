@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="genres">
+        <item>все</item>
+        <item>биография</item>
+        <item>боевик</item>
+        <item>вестерн</item>
+        <item>военный</item>
+        <item>детектив</item>
+        <item>документальный</item>
+        <item>драма</item>
+        <item>история</item>
+        <item>комедия</item>
+        <item>криминал</item>
+        <item>мелодрама</item>
+        <item>музыка</item>
+        <item>мультфильм</item>
+        <item>мюзикл</item>
+        <item>приключения</item>
+        <item>семейный</item>
+        <item>спорт</item>
+        <item>триллер</item>
+        <item>ужасы</item>
+        <item>фэнтези</item>
+    </string-array>
+</resources>
