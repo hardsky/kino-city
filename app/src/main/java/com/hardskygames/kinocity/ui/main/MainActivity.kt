@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
 import com.hardskygames.kinocity.R
 import com.hardskygames.kinocity.entity.Movie
 import com.hardskygames.kinocity.service.IKinoService
@@ -100,6 +101,9 @@ class MainActivity : BaseActivity() {
 
             }
         }
+
+        val adRequest = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+        advView.loadAd(adRequest)
     }
 
     override fun onResume() {

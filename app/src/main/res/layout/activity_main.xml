@@ -5,6 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="com.hardskygames.kinocity.ui.main.MainActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -44,6 +45,16 @@
 
     </RelativeLayout>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/advView"
+        android:layout_above="@id/bottomControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lstMovies"
         android:layout_marginTop="8dp"
@@ -51,7 +62,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/bottomControls"
+        android:layout_above="@id/advView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

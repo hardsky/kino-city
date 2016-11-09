@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "602160163817",
+    "firebase_url": "https://kinocity-b8abf.firebaseio.com",
+    "project_id": "kinocity-b8abf",
+    "storage_bucket": "kinocity-b8abf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602160163817:android:6df67934d1dee54e",
+        "android_client_info": {
+          "package_name": "com.hardskygames.kinocity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602160163817-543798curdvg7h09ogbn467hao88m0ed.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [{ "current_key": "" }],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

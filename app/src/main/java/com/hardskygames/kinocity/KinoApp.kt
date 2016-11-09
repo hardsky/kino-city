@@ -2,6 +2,7 @@ package com.hardskygames.kinocity
 
 import android.app.Application
 import android.util.Log
+import com.google.android.gms.ads.MobileAds
 import dagger.ObjectGraph
 import timber.log.Timber
 import java.util.*
@@ -17,6 +18,8 @@ class KinoApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        MobileAds.initialize(applicationContext, "ca-app-pub-3940256099942544~3347511713")
 
         applicationGraph = ObjectGraph.create(*modules.toTypedArray())
         applicationGraph.inject(this)

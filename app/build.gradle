@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.3"
     defaultConfig {
-        applicationId "com.hardskygames.kinopoiskcity"
+        applicationId "com.hardskygames.kinocity"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -54,6 +55,8 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.1'
+    compile 'com.google.firebase:firebase-core:9.8.0'
+    compile 'com.google.firebase:firebase-ads:9.8.0'
 }
 repositories {
     mavenCentral()
