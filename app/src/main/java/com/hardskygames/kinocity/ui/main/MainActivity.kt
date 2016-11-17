@@ -64,7 +64,6 @@ class MainActivity : BaseActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 genre = parent.getItemAtPosition(position) as String
                 adapter.filter(genre)
-                adapter.notifyDataSetChanged()
             }
         }
 
@@ -102,15 +101,15 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        val adRequest = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
-        advView.loadAd(adRequest)
+        //val adRequest = AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+        //advView.loadAd(adRequest)
     }
 
     override fun onResume() {
         super.onResume()
 
         bus.register(this)
-        subs = subj.subscribe{lst -> adapter.setData(lst); adapter.notifyDataSetChanged()}
+        subs = subj.subscribe{lst -> adapter.setData(lst)}
 
         btnSort.setOnClickListener {
             sort = when(sort){
@@ -119,7 +118,6 @@ class MainActivity : BaseActivity() {
                 RatingSortState.ASCENDING -> RatingSortState.NONE
             }
             adapter.sort(sort)
-            adapter.notifyDataSetChanged()
         }
     }
 
