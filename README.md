@@ -2,7 +2,7 @@
 
 ### Поиск киносеансов в моём городе
 
-Приложение на основе апи kinopoisk.cf (https://github.com/wielski/KinopoiskApi)
+Приложение на основе апи kinopoisk.cf (https://github.com/wielski/KinopoiskApi)  
 Проект заморожен и выложен под открытой лицензией, т.к. апи прекратило функционировать.
 
 показана работа:
